@@ -25,9 +25,7 @@ def get_letter_grade(average_grade):
         return 'F'
 
 def main():
-    print("Welcome to the Student Grade Tracker!")
-
-    # Dictionary to store subjects and their corresponding grades
+    print("Welcome to the Student Grade Tracker!\n")
     grades = {}
 
     while True:
@@ -36,23 +34,22 @@ def main():
             break
         
         try:
-            grade = float(input(f"Enter the grade for {subject}: ").strip())
+            grade = float(input(f"Enter the grade for {subject} (0-100): ").strip())
+            if grade < 0 or grade > 100:
+                print("Invalid input. Grade must be between 0 and 100.\n")
+                continue
             grades[subject] = grade
         except ValueError:
-            print("Invalid input. Please enter a numeric grade.")
+            print("Invalid input. Please enter a numeric grade.\n")
 
     if not grades:
         print("No grades were entered.")
         return
 
-    # Calculate average grade
     average_grade = sum(grades.values()) / len(grades)
-    
-    # Determine letter grade and GPA
     letter_grade = get_letter_grade(average_grade)
     gpa = calculate_gpa(average_grade)
     
-    # Display results
     print("\nGrade Report:")
     print(f"{'Subject':<20} {'Grade':<5}")
     print("-" * 25)
@@ -63,4 +60,8 @@ def main():
     print(f"Average Grade: {average_grade:.2f}")
     print(f"Letter Grade: {letter_grade}")
     print(f"GPA: {gpa:.2f}")
+
+if __name__ == "__main__":
+    main()
+
 
